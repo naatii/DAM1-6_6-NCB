@@ -1,5 +1,3 @@
-import kotlin.collections.Iterator
-
 /*Una Pila tiene un conjunto de métodos: (para ver más sobre la pila consulta aqui
 Tope: devuelve el elemento en la cabeza de la pila.
 Push: Insertar o apilar
@@ -24,27 +22,36 @@ Para llevar a cabo la función reverse, será obligatorio:
 Hacer uso de la interfaz Iterator para recorrer la lista.
 Hacer uso de la clase Pila que has creado para invertir el orden.*/
 interface Iterador{
-    fun <T> recorrer(lista:MutableList<T>): MutableListIterator<T> {
-        return lista.listIterator()
+    fun <T> recorrer(lista:List<T>): Iterator<T> {
+        return lista.iterator()
     }
 }
 class Pila<T>(){
-    private var pila:MutableList<T> = mutableListOf()
-    fun top(): T {
-        return pila[-1]
+    private var pila = mutableListOf<T>()
+    fun tope(): T {
+        return pila.last()
     }
-    fun push(elemento:T){
+    fun push(elemento: T){
         pila.add(elemento)
     }
-    fun pop(){
-        pila.removeAt(-1)
+    fun pop():T?{
+        return pila.removeLastOrNull()
     }
     fun empty(): Boolean {
         return pila.isEmpty()
     }
 }
-fun <T> reverse(interfaz:Iterator, pila:Pila) {
-
+fun <T> reverse(list: List<T>): List<T> {
+    var pila = Pila<T>()
+    val iterador = list.iterator()
+    while (iterador.hasNext()){
+        pila.push(iterador.next())
+    }
+    val reversed = mutableListOf<T>()
+    while (!pila.empty()){
+        reversed.add(pila.pop()!!)
+    }
+    return reversed
 }
 fun main() {
     var numbers = listOf("one", "two", "three", "four")
