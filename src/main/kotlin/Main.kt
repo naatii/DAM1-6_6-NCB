@@ -23,28 +23,28 @@ Se usará este código para probar el programa para probarla:
 Para llevar a cabo la función reverse, será obligatorio:
 Hacer uso de la interfaz Iterator para recorrer la lista.
 Hacer uso de la clase Pila que has creado para invertir el orden.*/
-interface Iterator{
-    fun <T> recorrer(lista:List<T>): Iterator<T> {
-        return lista.iterator()
+interface Iterador{
+    fun <T> recorrer(lista:MutableList<T>): MutableListIterator<T> {
+        return lista.listIterator()
     }
 }
 class Pila<T>(){
-    private var lista:MutableList<T> = mutableListOf()
-    fun top(){
-        return lista[-1]
+    private var pila:MutableList<T> = mutableListOf()
+    fun top(): T {
+        return pila[-1]
     }
-    fun push(elemento){
-        lista.add(elemento)
+    fun push(elemento:T){
+        pila.add(elemento)
     }
     fun pop(){
-        lista.removeAt(-1)
+        pila.removeAt(-1)
     }
-    fun empty(elemento){
-        return elemento.isEmpty()
+    fun empty(): Boolean {
+        return pila.isEmpty()
     }
 }
-fun <T> reverse(numbers: List<T>): List<T> {
-    return numbers.reversed()
+fun <T> reverse(interfaz:Iterator, pila:Pila) {
+
 }
 fun main() {
     var numbers = listOf("one", "two", "three", "four")
